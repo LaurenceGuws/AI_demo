@@ -14,6 +14,16 @@ body {
     color: #f2f2f2;
 }
 
+h2 {
+    font-size: 1.5em;
+    /* text-align: center; */
+    padding: 10px;
+    background-color: #424243;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
 #conversationsPane {
     width: 20%;
     height: 100%;
