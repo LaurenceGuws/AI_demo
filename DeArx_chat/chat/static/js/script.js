@@ -1,3 +1,4 @@
+
 document.getElementById('messageForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -7,8 +8,10 @@ document.getElementById('messageForm').addEventListener('submit', function(e) {
 
     // Display the message in the chatbox
     var userMessage = document.createElement('p');
-    userMessage.textContent = 'User: ' + message;
+    userMessage.textContent = message;
+    userMessage.className = 'user-message';  // Add class to user message
     chatbox.appendChild(userMessage);
+    chatbox.scrollTop = chatbox.scrollHeight; // Auto scroll to bottom
 
     // Send message to server and log response
     fetch('/message', {
@@ -22,8 +25,10 @@ document.getElementById('messageForm').addEventListener('submit', function(e) {
     .then(data => {
         // Display the response in the chatbox
         var botMessage = document.createElement('p');
-        botMessage.textContent = 'Bot: ' + data.response;
+        botMessage.textContent = data.response;
+        botMessage.className = 'bot-message';  // Add class to bot message
         chatbox.appendChild(botMessage);
+        chatbox.scrollTop = chatbox.scrollHeight; // Auto scroll to bottom
     })
     .catch(error => console.error('Error:', error));
 
