@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #1a1a1a;
+    background-color: #0b0f14; /* darker navy grey */
     color: #f2f2f2;
 }
 
@@ -18,7 +18,7 @@ h2 {
     font-size: 1.5em;
     text-align: center;
     padding: 10px;
-    background-color: #424243;
+    background-color: #19232d; 
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     overflow-y: auto;
     box-sizing: border-box;
@@ -29,7 +29,7 @@ h2 {
     height: 100%;
     border-radius: 15px;
     padding: 20px;
-    background-color: #333333;
+    background-color: #0b0f14;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     overflow-y: auto;
     box-sizing: border-box;
@@ -40,7 +40,7 @@ h2 {
     width: 100%;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #4d4d4d;
+    background-color: #1f2633; 
     border: none;
     border-radius: 30px;
     color: #f2f2f2;
@@ -61,7 +61,7 @@ h2 {
     height: 85%;
     border-radius: 15px;
     padding: 20px;
-    background-color: #333333;
+    background-color: #0b0f14; 
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     overflow-y: auto;
     box-sizing: border-box;
@@ -74,7 +74,7 @@ h2 {
 
 #chatbox .user-message {
     align-self: flex-end;
-    background-color: #595959;
+    background-color: #2b3644; 
     color: #f2f2f2;
     padding: 10px 15px;
     border-radius: 20px;
@@ -83,7 +83,7 @@ h2 {
 }
 
 #chatbox .bot-message {
-    background-color: #404040;
+    background-color: #1f2633; 
     padding: 10px 15px;
     border-radius: 20px;
     margin: 10px;
@@ -96,7 +96,7 @@ h2 {
     width: 100%;
     height: 15%;
     padding: 20px;
-    background-color: #333333;
+    background-color: #0b0f14;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     box-sizing: border-box;
     margin: 0;
@@ -112,7 +112,7 @@ h2 {
     padding: 20px;
     margin-right: 10px;
     border-radius: 30px;
-    background-color: #737373;
+    background-color: #2b3644;
     width: 80%;
     font-size: 16px;
     color: #f2f2f2;
@@ -125,7 +125,7 @@ h2 {
 
 #messageForm button {
     padding: 20px 15px;
-    background-color: #737373;
+    background-color: #2b3644; 
     color: #f2f2f2;
     cursor: pointer;
     border-radius: 30px;
@@ -136,9 +136,26 @@ h2 {
 }
 
 #messageForm button:hover {
-    background-color: #808080;
+    background-color: #364551;
 }
 
 #messageInput::placeholder {
-    color: #ababab;
+    color: #4f5b6d;
+}
+
+#optionsPane {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    z-index: 100; /* Ensure the pane is not hidden behind other elements */
+}
+
+#optionsButton {
+    font-size: 30px; /* Increased from 20px to 30px */
+    padding: 10px 15px; /* Increased padding for a larger button */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4f5b6d; /* Set this to the color of your h2 tags */
 }
