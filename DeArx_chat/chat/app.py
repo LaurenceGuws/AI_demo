@@ -1,6 +1,8 @@
 import base64
 import configparser
 from flask import Flask, render_template, request, jsonify, session
+from werkzeug.utils import secure_filename
+import os
 import sqlite3
 from models.gpt import Chat
 from setup import build_db
@@ -81,6 +83,18 @@ def get_conversation(name):
     messages = [row[0] for row in cursor.fetchall()]
     conn.close()
     return jsonify({'messages': messages})
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return 'No file part', 400
+    file = request.files['file']
+    if file.filename == '':
+        return 'No selected file', 400
+    if file:
+        filename = secure_filename(file.filename)
+        file.save(os.path.join('files', filename))
+        return 'File uploaded successfully', 200
 
 @app.cli.command()
 def setup():

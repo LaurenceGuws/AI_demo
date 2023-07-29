@@ -23,9 +23,10 @@
             <div id="optionsDropdown">
                 <a href="#" id="changeModel">Change AI Model</a>
                 <a href="#" id="customInstructions">Custom Instructions</a>
-                <a href="#" id="uploadFile">Upload a File</a>
+                <a href="#" id="uploadLink">Upload a File</a>
             </div>
         </div>
+        <input type="file" id="fileUpload" style="display: none;">
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -37,6 +38,28 @@
             });
             $(document).click(function() {
                 $('#optionsDropdown').hide();
+            });
+            $('#uploadLink').click(function(event) {
+                event.preventDefault();
+                $('#fileUpload').click();
+            });
+            $('#fileUpload').change(function() {
+                var formData = new FormData();
+                formData.append('file', $(this)[0].files[0]);
+                $.ajax({
+                    url: '/upload',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        alert(response);
+                        $('#fileUpload').val(''); // Clear the input
+                    },
+                    error: function(jqXHR, textStatus, errorMessage) {
+                        alert('Error uploading: ' + errorMessage);
+                    }
+                });
             });
         });
     </script>
