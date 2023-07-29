@@ -1,29 +1,57 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
     font-family: 'Roboto', sans-serif;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
     height: 100vh;
     margin: 0;
-    padding: 10px;
+    padding: 0;
     box-sizing: border-box;
-    background-color: #333;
-    color: #fff;
+    background-color: #1a1a1a;
+    color: #f2f2f2;
+}
+
+#conversationsPane {
+    width: 20%;
+    height: 100%;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #333333;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#conversationsPane button {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #4d4d4d;
+    border: none;
+    border-radius: 30px;
+    color: #f2f2f2;
+    text-align: left;
+    cursor: pointer;
+}
+
+#mainContent {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
 }
 
 #chatbox {
     width: 100%;
-    max-width: 600px;
-    height: 70%;
-    min-height: 400px;
+    height: 85%;
     border-radius: 15px;
     padding: 20px;
-    margin-bottom: 20px;
-    background-color: #555;
+    background-color: #333333;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     overflow-y: auto;
     box-sizing: border-box;
@@ -36,8 +64,8 @@ body {
 
 #chatbox .user-message {
     align-self: flex-end;
-    background-color: #777;
-    color: #fff;
+    background-color: #595959;
+    color: #f2f2f2;
     padding: 10px 15px;
     border-radius: 20px;
     margin: 10px;
@@ -45,21 +73,20 @@ body {
 }
 
 #chatbox .bot-message {
-    background-color: #444;
+    background-color: #404040;
     padding: 10px 15px;
     border-radius: 20px;
     margin: 10px;
 }
 
 #messageForm {
-    display: flex;
-    justify-content: space-between;
     width: 100%;
-    max-width: 600px;
-    padding: 15px;
-    background-color: #555;
-    border-radius: 15px;
+    height: 15%;
+    padding: 20px;
+    background-color: #333333;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-sizing: border-box;
+    margin: 0;
 }
 
 #messageForm input, #messageForm button {
@@ -69,25 +96,30 @@ body {
 
 #messageInput {
     flex-grow: 1;
-    padding: 10px;
+    padding: 20px;
     margin-right: 10px;
-    border-radius: 15px;
-    background-color: #777;
+    border-radius: 30px;
+    background-color: #737373;
+    width: 80%;
+    font-size: 16px;
+    color: #f2f2f2;
 }
 
 #messageForm button {
-    padding: 10px 15px;
-    background-color: #434343;
-    color: #fff;
+    padding: 20px 15px;
+    background-color: #737373;
+    color: #f2f2f2;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 30px;
     transition: background-color 0.3s ease;
+    width: 15%;
+    font-size: 16px;
 }
 
 #messageForm button:hover {
-    background-color: #0056b3;
+    background-color: #808080;
 }
 
 #messageInput::placeholder {
-    color: #555;
+    color: #ababab;
 }

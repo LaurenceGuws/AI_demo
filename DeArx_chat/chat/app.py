@@ -64,6 +64,16 @@ def message():
 
     return jsonify({'response': response})
 
+@app.route('/conversations', methods=['GET'])
+def get_conversations():
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT name FROM conversation')
+    conversations = [row[0] for row in cursor.fetchall()]
+    conn.close()
+    return jsonify({'conversations': conversations})
+
+
 @app.cli.command()
 def setup():
     """Run the setup function."""
