@@ -7,7 +7,7 @@ from setup import build_db
 
 app = Flask(__name__)
 config = configparser.ConfigParser()
-config.read('conf\config.conf')
+config.read('conf\\config.conf')
 app.secret_key = base64.b64decode(config['OpenAI']['API_KEY']).decode()
 
 @app.route('/')
@@ -72,6 +72,15 @@ def get_conversations():
     print(f'Fetched {len(conversations)} conversations')  # Print the number of fetched conversations
     conn.close()
     return jsonify({'conversations': conversations})
+
+@app.route('/conversations/<name>', methods=['GET'])
+def get_conversation(name):
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT content FROM messages JOIN conversation ON messages.conversation_id = conversation.id WHERE conversation.name = ?', (name,))
+    messages = [row[0] for row in cursor.fetchall()]
+    conn.close()
+    return jsonify({'messages': messages})
 
 @app.cli.command()
 def setup():

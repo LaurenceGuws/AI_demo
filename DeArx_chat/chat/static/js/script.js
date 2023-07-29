@@ -8,7 +8,20 @@ window.addEventListener('load', function() {
             var button = document.createElement('button');
             button.textContent = conversation;
             button.addEventListener('click', function() {
-                // TODO: Add functionality for when a conversation button is clicked
+                fetch('/conversations/' + encodeURIComponent(conversation))
+                .then(response => response.json())
+                .then(data => {
+                    var chatbox = document.getElementById('chatbox');
+                    chatbox.textContent = '';  // Clear the chatbox
+                    data.messages.forEach(function(message, index) {
+                        // Display each message in the chatbox with the appropriate CSS class
+                        var messageElement = document.createElement('p');
+                        messageElement.textContent = message;
+                        messageElement.className = (index % 2 == 0) ? 'user-message' : 'bot-message';
+                        chatbox.appendChild(messageElement);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
             });
             conversationsPane.appendChild(button);
         });
