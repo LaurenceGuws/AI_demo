@@ -12,12 +12,12 @@ app.secret_key = base64.b64decode(config['OpenAI']['API_KEY']).decode()
 
 @app.route('/')
 def index():
+    session.clear()
     return render_template('index.html')
 
 @app.route('/message', methods=['POST'])
 def message():
     message = request.form.get('message')
-    print(message)
 
     # Get the conversation from the session, or start a new one
     conversation = session.get('conversation')
@@ -46,7 +46,6 @@ def message():
     messages_for_gpt.insert(0, {'role': 'system', 'content': 'Welcome to the chat!'})
 
     response = Chat.chat_gpt_interact(messages_for_gpt)
-    print(response)
 
     # Add the bot's response to the conversation
     conversation['messages'].append({'role': 'assistant', 'content': response})
@@ -70,9 +69,9 @@ def get_conversations():
     cursor = conn.cursor()
     cursor.execute('SELECT name FROM conversation')
     conversations = [row[0] for row in cursor.fetchall()]
+    print(f'Fetched {len(conversations)} conversations')  # Print the number of fetched conversations
     conn.close()
     return jsonify({'conversations': conversations})
-
 
 @app.cli.command()
 def setup():
