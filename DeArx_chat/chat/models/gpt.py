@@ -1,15 +1,11 @@
 import os
 import openai
 import base64
-import configparser
 
 class Chat:
     @staticmethod
     def chat_gpt_interact(messages):
-        # Read the API key from the config file and decode it
-        config = configparser.ConfigParser()
-        config.read('conf\config.conf')
-        openai_key = os.getenv('OPENAI_API_KEY')
+        openai_key = base64.b64decode(os.getenv('OPENAI_API_KEY')).decode()
         openai.api_key = openai_key
 
         # Call the GPT model

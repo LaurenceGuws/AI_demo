@@ -11,10 +11,6 @@ COPY . /app
 # Set PYTHONPATH environment variable
 ENV PYTHONPATH /app
 
-# Install dos2unix and convert the line endings of the configuration file
-RUN apt-get update && apt-get install -y dos2unix
-RUN dos2unix /app/conf/config.conf
-
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 

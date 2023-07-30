@@ -26,6 +26,13 @@
                 <a href="#" id="uploadLink">Upload a File</a>
             </div>
         </div>
+        <form id="modelForm" style="display: none;">
+            <select>
+              <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+              <!-- Add other model options here -->
+            </select>
+            <input type="submit" value="Change Model">
+          </form>
         <input type="file" id="fileUpload" style="display: none;">
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </div>
@@ -42,6 +49,13 @@
             $('#uploadLink').click(function(event) {
                 event.preventDefault();
                 $('#fileUpload').click();
+            });
+            $(document).ready(function() {
+            $("#changeModel").click(function(e) {
+                e.preventDefault();
+                // Add your logic here. For example, show a form:
+                $("#modelForm").show();
+            });
             });
             $('#fileUpload').change(function() {
                 var formData = new FormData();
