@@ -19,12 +19,22 @@
             <button type="submit">Send</button>
         </form>
         <div id="optionsPane">
-            <button id="optionsButton">&#8942;</button>
-            <div id="optionsDropdown">
-                <a href="#" id="changeModel">Change AI Model</a>
-                <a href="#" id="customInstructions">Custom Instructions</a>
-                <a href="#" id="uploadLink">Upload a File</a>
+            <div id="dropdownContainer">
+                <button id="optionsButton">&#8942;</button>
+                <div id="optionsDropdown">
+                    <a href="#" id="changeModel">Change AI Model</a>
+                    <a href="#" id="customInstructions">Custom Instructions</a>
+                    <a href="#" id="uploadLink">Upload a File</a>
+                </div>
             </div>
+            <form id="modelForm">
+                <select>
+                  <option value="gpt-3.5-turbo">GPT-3.5</option>
+                  <option value="bard">Bard</option>
+                  <!-- Add other model options here -->
+                </select>
+                <input type="submit" value="Change Model">
+            </form>
         </div>
         <input type="file" id="fileUpload" style="display: none;">
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
@@ -42,6 +52,11 @@
             $('#uploadLink').click(function(event) {
                 event.preventDefault();
                 $('#fileUpload').click();
+            });
+            $("#changeModel").click(function(e) {
+                e.preventDefault();
+                $("#optionsDropdown").hide();
+                $("#modelForm").show();
             });
             $('#fileUpload').change(function() {
                 var formData = new FormData();
