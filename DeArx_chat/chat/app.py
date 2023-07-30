@@ -10,7 +10,8 @@ from setup import build_db
 app = Flask(__name__)
 config = configparser.ConfigParser()
 config.read('conf\\config.conf')
-app.secret_key = base64.b64decode(config['OpenAI']['API_KEY']).decode()
+app.secret_key = os.getenv('OPENAI_API_KEY')
+
 
 @app.route('/')
 def index():
