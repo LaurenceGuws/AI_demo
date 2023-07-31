@@ -14,8 +14,11 @@ ENV PYTHONPATH /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Make the start.sh script executable
+RUN chmod +x start.sh
+
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
-# Run flask command when the container launches
-CMD ["flask", "run", "--debug", "--host=0.0.0.0", "--port=5000"]
+# Run start.sh when the container launches
+CMD ["./start.sh"]
