@@ -1,5 +1,4 @@
 import base64
-import configparser
 from flask import Flask, render_template, request, jsonify, session
 from werkzeug.utils import secure_filename
 import os
@@ -8,9 +7,7 @@ from models.gpt import Chat
 from setup import build_db
 
 app = Flask(__name__)
-config = configparser.ConfigParser()
-config.read('conf\\config.conf')
-app.secret_key = base64.b64decode(config['OpenAI']['API_KEY']).decode()
+app.secret_key = base64.b64decode(os.getenv('OPENAI_API_KEY')).decode()
 
 @app.route('/')
 def index():
