@@ -77,6 +77,23 @@
                 });
             });
         });
-    </script>
+    
+    $("#modelForm").submit(function(e) {
+        e.preventDefault();  // Prevent the default form submission behaviour
+        var selectedModel = $(this).find("select").val();  // Get the selected model
+
+        $.ajax({
+            url: '/change_model',  // The endpoint on the server that changes the AI model
+            type: 'POST',
+            data: { 'model': selectedModel },  // Send the selected model as data
+            success: function(response) {
+                alert(response);  // Show a success message
+            },
+            error: function(jqXHR, textStatus, errorMessage) {
+                alert('Error changing model: ' + errorMessage);  // Show an error message
+            }
+        });
+    });
+</script>
 </body>
 </html>
