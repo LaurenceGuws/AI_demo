@@ -165,7 +165,6 @@ h2 {
     bottom: 50px;
     left: 10px;
     background-color: #0b0f14;
-    border: 1px solid #f2f2f2;
     border-radius: 5px;
     z-index: 101;
 }
@@ -179,4 +178,30 @@ h2 {
 
 #optionsDropdown a:hover {
     background-color: #1f2633;
+}
+
+#modelsPopup {
+    position: fixed;
+    color: #f2f2f2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1f2633;
+    padding: 20px;
+    border: 1px solid #354055;
+    border-radius: 5px;
+    z-index: 101;
+    text-align: center;
+}
+
+#modelsPopup a {
+    display: block;
+    color: #0b0f14;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+#modelsPopup a:hover {
+    background-color: #1f2633;
+    color: #f2f2f2;
 }

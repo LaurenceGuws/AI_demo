@@ -25,14 +25,12 @@
                 <a href="#" id="customInstructions">Custom Instructions</a>
                 <a href="#" id="uploadLink">Upload a File</a>
             </div>
+            <div id="modelsPopup" style="display: none;">
+                <a href="#" class="modelOption">Model 1</a><br>
+                <a href="#" class="modelOption">Model 2</a>
+                <!-- More model options can go here -->
+            </div>                    
         </div>
-        <form id="modelForm" style="display: none;">
-            <select>
-              <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
-              <!-- Add other model options here -->
-            </select>
-            <input type="submit" value="Change Model">
-          </form>
         <input type="file" id="fileUpload" style="display: none;">
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </div>
@@ -53,10 +51,30 @@
             $(document).ready(function() {
             $("#changeModel").click(function(e) {
                 e.preventDefault();
-                // Add your logic here. For example, show a form:
-                $("#modelForm").show();
+                $("#modelsPopup").toggle();
             });
             });
+            $(".modelOption").click(function(e) {
+                e.preventDefault();
+                
+                // Get the chosen model name
+                var modelName = $(this).text();
+
+                // Send the model name to the backend
+                $.ajax({
+                    url: '/change_model',
+                    type: 'POST',
+                    data: { 'model_name': modelName },
+                    success: function(response) {
+                        alert(response);
+                        $('#modelsPopup').hide();  // Hide the popup
+                    },
+                    error: function(jqXHR, textStatus, errorMessage) {
+                        alert('Error changing model: ' + errorMessage);
+                    }
+                });
+            });
+
             $('#fileUpload').change(function() {
                 var formData = new FormData();
                 formData.append('file', $(this)[0].files[0]);

@@ -92,6 +92,17 @@ def upload_file():
         filename = secure_filename(file.filename)
         file.save(os.path.join('files', filename))
         return 'File uploaded successfully', 200
+    
+@app.route('/change_model', methods=['POST'])
+def change_model():
+    # Get the chosen model name from the request data
+    model_name = request.form.get('model_name')
+
+    # TODO: Change the model in your application
+
+    # Return a success message
+    return 'Changed to model ' + model_name
+
 
 @app.cli.command()
 def setup():
