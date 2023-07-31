@@ -92,18 +92,6 @@ def upload_file():
         filename = secure_filename(file.filename)
         file.save(os.path.join('files', filename))
         return 'File uploaded successfully', 200
-    
-@app.route('/models', methods=['GET'])
-def get_models():
-    # Return a list of configured models
-    models = ["GPT-3.5", "Bard"]  # replace with your actual models
-    return jsonify({'models': models})
-
-@app.route('/change_model', methods=['POST'])
-def change_model():
-    model = request.form.get('model')
-    # change the model here
-    return 'Model changed', 200
 
 @app.cli.command()
 def setup():

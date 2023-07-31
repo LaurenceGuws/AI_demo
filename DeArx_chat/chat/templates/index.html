@@ -19,22 +19,12 @@
             <button type="submit">Send</button>
         </form>
         <div id="optionsPane">
-            <div id="dropdownContainer">
-                <button id="optionsButton">&#8942;</button>
-                <div id="optionsDropdown">
-                    <a href="#" id="changeModel">Change AI Model</a>
-                    <a href="#" id="customInstructions">Custom Instructions</a>
-                    <a href="#" id="uploadLink">Upload a File</a>
-                </div>
+            <button id="optionsButton">&#8942;</button>
+            <div id="optionsDropdown">
+                <a href="#" id="changeModel">Change AI Model</a>
+                <a href="#" id="customInstructions">Custom Instructions</a>
+                <a href="#" id="uploadLink">Upload a File</a>
             </div>
-            <form id="modelForm">
-                <select>
-                  <option value="gpt-3.5-turbo">GPT-3.5</option>
-                  <option value="bard">Bard</option>
-                  <!-- Add other model options here -->
-                </select>
-                <input type="submit" value="Change Model">
-            </form>
         </div>
         <form id="modelForm" style="display: none;">
             <select>
@@ -60,6 +50,12 @@
                 event.preventDefault();
                 $('#fileUpload').click();
             });
+            $(document).ready(function() {
+            $("#changeModel").click(function(e) {
+                e.preventDefault();
+                // Add your logic here. For example, show a form:
+                $("#modelForm").show();
+            });
             });
             $('#fileUpload').change(function() {
                 var formData = new FormData();
@@ -80,23 +76,6 @@
                 });
             });
         });
-    
-    $("#modelForm").submit(function(e) {
-        e.preventDefault();  // Prevent the default form submission behaviour
-        var selectedModel = $(this).find("select").val();  // Get the selected model
-
-        $.ajax({
-            url: '/change_model',  // The endpoint on the server that changes the AI model
-            type: 'POST',
-            data: { 'model': selectedModel },  // Send the selected model as data
-            success: function(response) {
-                alert(response);  // Show a success message
-            },
-            error: function(jqXHR, textStatus, errorMessage) {
-                alert('Error changing model: ' + errorMessage);  // Show an error message
-            }
-        });
-    });
-</script>
+    </script>
 </body>
 </html>
