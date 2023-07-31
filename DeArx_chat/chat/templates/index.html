@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Chatbot</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="conversationsPane">
@@ -26,15 +28,12 @@
                 <a href="#" id="uploadLink">Upload a File</a>
             </div>
             <div id="modelsPopup" style="display: none;">
-                <a href="#" class="modelOption">Model 1</a><br>
-                <a href="#" class="modelOption">Model 2</a>
-                <!-- More model options can go here -->
-            </div>                    
+                <!-- Model options will be added here dynamically -->
+            </div>            
         </div>
         <input type="file" id="fileUpload" style="display: none;">
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#optionsButton').click(function(event) {
@@ -48,33 +47,10 @@
                 event.preventDefault();
                 $('#fileUpload').click();
             });
-            $(document).ready(function() {
             $("#changeModel").click(function(e) {
                 e.preventDefault();
                 $("#modelsPopup").toggle();
             });
-            });
-            $(".modelOption").click(function(e) {
-                e.preventDefault();
-                
-                // Get the chosen model name
-                var modelName = $(this).text();
-
-                // Send the model name to the backend
-                $.ajax({
-                    url: '/change_model',
-                    type: 'POST',
-                    data: { 'model_name': modelName },
-                    success: function(response) {
-                        alert(response);
-                        $('#modelsPopup').hide();  // Hide the popup
-                    },
-                    error: function(jqXHR, textStatus, errorMessage) {
-                        alert('Error changing model: ' + errorMessage);
-                    }
-                });
-            });
-
             $('#fileUpload').change(function() {
                 var formData = new FormData();
                 formData.append('file', $(this)[0].files[0]);
@@ -93,6 +69,28 @@
                     }
                 });
             });
+            // Fetch the model names from the server
+            fetch('/get_models')
+                .then(response => response.json())
+                .then(models => {
+                    // Generate the model options
+                    const modelsPopup = $('#modelsPopup');
+                    models.forEach(model => {
+                        const modelOption = $('<a></a>').addClass('modelOption').attr('href', '#').text(model);
+                        modelOption.click(function(e) {
+                            e.preventDefault();
+                            modelsPopup.hide();
+                            $.post('/change_model', { model_name: model })
+                                .done(function(response) {
+                                    alert(response);
+                                })
+                                .fail(function() {
+                                    alert('Error changing model');
+                                });
+                        });
+                        modelsPopup.append(modelOption);
+                    });
+                });
         });
     </script>
 </body>

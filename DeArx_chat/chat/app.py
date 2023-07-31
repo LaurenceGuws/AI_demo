@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, jsonify, session
 from werkzeug.utils import secure_filename
 import os
 import sqlite3
-from models.gpt import Chat
+from models.gpt import interact
 from setup import build_db
 
 app = Flask(__name__)
@@ -44,7 +44,7 @@ def message():
     messages_for_gpt = [{'role': m['role'], 'content': m['content']} for m in conversation['messages']]
     messages_for_gpt.insert(0, {'role': 'system', 'content': 'Welcome to the chat!'})
 
-    response = Chat.chat_gpt_interact(messages_for_gpt)
+    response = interact(messages_for_gpt)
 
     # Add the bot's response to the conversation
     conversation['messages'].append({'role': 'assistant', 'content': response})
@@ -102,6 +102,16 @@ def change_model():
 
     # Return a success message
     return 'Changed to model ' + model_name
+
+@app.route('/get_models', methods=['GET'])
+def get_models():
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT name FROM models')
+    models = [row[0] for row in cursor.fetchall()]
+    conn.close()
+    return jsonify(models)
+
 
 
 @app.cli.command()
