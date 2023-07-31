@@ -1,9 +1,9 @@
 import base64
+import importlib
 from flask import Flask, render_template, request, jsonify, session
 from werkzeug.utils import secure_filename
 import os
 import sqlite3
-from models.gpt import interact
 from setup import build_db
 
 app = Flask(__name__)
@@ -44,7 +44,12 @@ def message():
     messages_for_gpt = [{'role': m['role'], 'content': m['content']} for m in conversation['messages']]
     messages_for_gpt.insert(0, {'role': 'system', 'content': 'Welcome to the chat!'})
 
-    response = interact(messages_for_gpt)
+    # Dynamically import the model module based on the active_model session variable
+    active_model = session.get('active_model') or 'gpt'
+    model_module = importlib.import_module(f'models.{active_model}')
+
+    # Use the dynamically imported module to interact
+    response = model_module.interact(messages_for_gpt)
 
     # Add the bot's response to the conversation
     conversation['messages'].append({'role': 'assistant', 'content': response})
@@ -98,10 +103,12 @@ def change_model():
     # Get the chosen model name from the request data
     model_name = request.form.get('model_name')
 
-    # TODO: Change the model in your application
+    # Set the model_name as a session variable
+    session['active_model'] = model_name
 
     # Return a success message
     return 'Changed to model ' + model_name
+
 
 @app.route('/get_models', methods=['GET'])
 def get_models():
