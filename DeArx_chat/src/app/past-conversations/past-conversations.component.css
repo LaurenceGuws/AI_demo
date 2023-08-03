@@ -1,0 +1,19 @@
+.past-conversations {
+    width: 200px;
+    padding: 15px;
+    border-right: 1px solid #ccc;
+    float: left;
+  }
+  
+  .past-conversations h3 {
+    margin: 0;
+    padding-bottom: 10px;
+  }
+  
+  .past-conversations button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+  
