@@ -86,28 +86,28 @@ def get_conversation(name):
     conn.close()
     return jsonify({'messages': messages})
 
-@app.route('/upload', methods=['POST'])
+@app.route('/upload', methods=['POST'])  
 def upload_file():
     if 'file' not in request.files:
-        return 'No file part', 400
+        return jsonify({'message': 'No file part'}), 400
+    
     file = request.files['file']
     if file.filename == '':
-        return 'No selected file', 400
+        return jsonify({'message': 'No selected file'}), 400
+    
     if file:
         filename = secure_filename(file.filename)
         file.save(os.path.join('files', filename))
-        return 'File uploaded successfully', 200
-    
+        return jsonify({'message': 'File uploaded successfully'}), 200
+
 @app.route('/change_model', methods=['POST'])
 def change_model():
-    # Get the chosen model name from the request data
     model_name = request.form.get('model_name')
-
-    # Set the model_name as a session variable
     session['active_model'] = model_name
 
-    # Return a success message
-    return 'Changed to model ' + model_name
+    return jsonify({
+        'message': 'Changed to model ' + model_name  
+    }), 200
 
 
 @app.route('/get_models', methods=['GET'])
