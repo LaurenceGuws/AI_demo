@@ -1,5 +1,6 @@
 import base64
 import importlib
+import logging
 from flask import Flask, render_template, request, jsonify, session
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -68,7 +69,7 @@ def message():
                        [(session['conversation_id'], (0 if message['role'] == 'assistant' else 1), message['content']) for message in conversation['messages']])
     conn.commit()
     conn.close()
-
+    logging.debug("Server response: %s", jsonify({'messages': conversation['messages']}))
     return jsonify({'messages': conversation['messages']})
 
 @app.route('/conversations', methods=['GET'])

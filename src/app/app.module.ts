@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';  
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  // Import BrowserAnimationsModule
 
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
 import { MessageInputComponent } from './message-input/message-input.component';
 import { OptionsComponent } from './options/options.component';
-import { HttpClientModule } from '@angular/common/http';  
-import { FormsModule } from '@angular/forms';
-import { PastConversationsComponent } from './past-conversations/past-conversations.component';  // <-- import FormsModule here
+import { PastConversationsComponent } from './past-conversations/past-conversations.component';
+import { ContainerComponent } from './container/container.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { PastConversationsComponent } from './past-conversations/past-conversati
     ChatComponent,
     MessageInputComponent,
     OptionsComponent,
-    PastConversationsComponent
+    PastConversationsComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule  // <-- and include it in the imports array
+    FormsModule,
+    BrowserAnimationsModule  // Include BrowserAnimationsModule in the imports array
   ],
   providers: [],
   bootstrap: [AppComponent]

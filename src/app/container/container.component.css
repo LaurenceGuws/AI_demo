@@ -8,6 +8,10 @@
   display: flex;
   flex: 1;
   overflow: auto;
+}  
+
+app-chat {
+  flex-grow: 1;
 }
 
 app-message-input {

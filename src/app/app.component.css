@@ -13,8 +13,8 @@ app-options {
     flex: 1;
 }
 
-app-chat {
-    flex-grow: 1;  /* Add this line */
+.chat {
+    flex-grow: 1;  /* Apply flex-grow to the .chat class */
 }
 
 app-message-input {

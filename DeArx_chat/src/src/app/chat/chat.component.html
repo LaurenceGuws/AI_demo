@@ -1,5 +1,0 @@
-<div class="chat">
-    <div *ngFor="let message of messages" class="message" [ngClass]="{'user': message.role === 'user', 'assistant': message.role === 'assistant'}">
-        <p>{{message.content}}</p>
-    </div>
-</div>

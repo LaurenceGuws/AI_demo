@@ -1,7 +1,9 @@
 .options {
+  position: absolute;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  top: 30px;
+  right: 30px;
 }
 
 .options button {

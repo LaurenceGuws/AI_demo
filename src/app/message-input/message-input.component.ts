@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-message-input',
@@ -9,24 +10,16 @@ import { HttpClient } from '@angular/common/http';
 export class MessageInputComponent implements OnInit {
   message = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private chatService: ChatService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   sendMessage(): void {
     if (!this.message) {
       return;
     }
 
-    this.http.post('http://localhost:30000/message', { message: this.message }).subscribe(
-      (data: any) => {
-        this.message = '';
-        // Here you could emit an event to tell the ChatComponent to refresh the messages
-      },
-      error => {
-        console.error('Error:', error);
-      }
-    );
+    this.chatService.addMessage({ role: 'user', content: this.message });
+    this.message = '';
   }
 }

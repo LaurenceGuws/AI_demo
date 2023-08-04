@@ -6,8 +6,8 @@
     border-top: 1px solid #333;
     position: fixed;  /* Changed from 'sticky' to 'fixed' */
     bottom: 0;
-    width: 99%;
-    height:15%;
+    width: 80%;
+    height:5%;
 }
 .message-input {
     display: flex;
