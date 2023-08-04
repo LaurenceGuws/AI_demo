@@ -40,11 +40,16 @@ def build_db(db_file):
     # Create the models table without the description field.
     cursor.execute('CREATE TABLE models (id INTEGER PRIMARY KEY, name TEXT, created_at TIMESTAMP)')
 
-    conn.commit()
+    cursor.execute("""
+    CREATE TABLE custom_instructions (
+        id INTEGER PRIMARY KEY,
+        example_request TEXT,
+        example_response TEXT
+    )
+    """)
 
     # Run the model_detect.py script and get the models that passed the test
     passed_test, failed_test = model_detect.test_models()
-
 
     # Add the models that passed the test to the database
     for model_name in passed_test:

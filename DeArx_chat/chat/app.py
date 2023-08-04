@@ -1,12 +1,15 @@
 import base64
 import importlib
 from flask import Flask, render_template, request, jsonify, session
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
 import sqlite3
 from setup import build_db
+import json
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = base64.b64decode(os.getenv('OPENAI_API_KEY')).decode()
 
 @app.route('/')
@@ -16,7 +19,8 @@ def index():
 
 @app.route('/message', methods=['POST'])
 def message():
-    message = request.form.get('message')
+    data = request.get_json()
+    message = data.get('message')
 
     # Get the conversation from the session, or start a new one
     conversation = session.get('conversation')
@@ -65,7 +69,7 @@ def message():
     conn.commit()
     conn.close()
 
-    return jsonify({'response': response})
+    return jsonify({'messages': conversation['messages']})
 
 @app.route('/conversations', methods=['GET'])
 def get_conversations():
@@ -82,11 +86,11 @@ def get_conversation(name):
     conn = sqlite3.connect('instance/chat.db')
     cursor = conn.cursor()
     cursor.execute('SELECT content FROM messages JOIN conversation ON messages.conversation_id = conversation.id WHERE conversation.name = ?', (name,))
-    messages = [row[0] for row in cursor.fetchall()]
+    messages = [{'role': 'user' if i % 2 == 0 else 'assistant', 'content': row[0]} for i, row in enumerate(cursor.fetchall())]
     conn.close()
     return jsonify({'messages': messages})
 
-@app.route('/upload', methods=['POST'])  
+@app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
         return jsonify({'message': 'No file part'}), 400
@@ -102,7 +106,7 @@ def upload_file():
 
 @app.route('/change_model', methods=['POST'])
 def change_model():
-    model_name = request.form.get('model_name')
+    model_name = request.get_json().get('model_name')
     session['active_model'] = model_name
 
     return jsonify({
@@ -119,6 +123,19 @@ def get_models():
     conn.close()
     return jsonify(models)
 
+@app.route('/custom_instructions', methods=['POST'])
+def custom_instructions():
+    instructions = request.get_json()
+
+    # Write the new instructions to the database
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO custom_instructions (example_request, example_response) VALUES (?, ?)', 
+                   (instructions['example_request'], instructions['example_response']))
+    conn.commit()
+    conn.close()
+
+    return jsonify({'message': 'Custom instructions saved successfully'}), 200
 
 
 @app.cli.command()

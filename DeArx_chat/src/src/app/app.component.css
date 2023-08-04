@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+app-options {
+    flex: 0;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+}
+
+app-chat {
+    flex-grow: 1;  /* Add this line */
+}
+
+app-message-input {
+    flex: 0;
+}
