@@ -40,6 +40,7 @@ def test_models():
             passed_test.append(filename.replace('.py', ''))
         except Exception as e:
             print(f"Error testing module '{filename}': {e}")
+            print(f"'{filename}': Undeploying")
             failed_test.append(filename.replace('.py', ''))
 
     return passed_test, failed_test
