@@ -25,16 +25,16 @@ def message():
 
     # Get the conversation from the session, or start a new one
     conversation = session.get('conversation')
-
+    print(message)
     # If there's no active conversation in the session
     if not conversation:
         # Start a new conversation with the name as the user's message
         conversation = {'name': message, 'messages': []}
-
+        message_content = message['content'] 
         # Write the new conversation to the database
         conn = sqlite3.connect('instance/chat.db')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO conversation (name) VALUES (?)', (message,))
+        cursor.execute('INSERT INTO conversation (name) VALUES (?)', (message_content,))
         conversation_id = cursor.lastrowid  # Get the ID of the new conversation
         conn.commit()
         conn.close()
@@ -43,7 +43,7 @@ def message():
         session['conversation_id'] = conversation_id
 
     # Add the new message to the conversation
-    conversation['messages'].append({'role': 'user', 'content': message})
+    conversation['messages'].append({'role': 'user', 'content': message_content})
 
     # Prepare messages for GPT
     messages_for_gpt = [{'role': m['role'], 'content': m['content']} for m in conversation['messages']]
