@@ -2,6 +2,9 @@ import vertexai
 from vertexai.preview.language_models import ChatModel, InputOutputTextPair
 
 def interact(messages):
+
+    return None
+
     project_id='palm-386622'
     model_name='chat-bison@001'
     temperature=0.5

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="/static/icons/favicon.ico" type="image/x-icon">
+    <title>Chat Interface</title>
+</head>
+<body>
+    <div id="container">
+        <div id="leftPane">
+            <h1><img src="/static/icons/company-logo.png" alt="Company Logo" style="width: 150px; height: 50px;"></h1>
+            <h2>Past Conversations</h2>
+            <div id="conversations"></div>
+            <div id="optionsArea">
+                <button id="optionsButton"><img src="/static/icons/options-icon.png" alt="Options" style="width: 27px; height: 27px;"></button>
+            </div>
+            <div id="optionsPopup" class="popup">
+                <div class="popup-content">
+                    <button id="customInstructionsButton">Custom Instructions</button>
+                    <button id="changeModelButton">Change Model</button>
+                    <button id="restartServer">Restart Server</button>
+                    <button id="downloadDB">Download DB</button>
+                    <button id="closePopup">Close</button>
+                </div>
+            </div>
+            <div id="changeModelPopup" class="popup">
+                <div class="popup-content">
+                    <p id="notificationMessage"></p>
+                    <button id="closeChangeModelPopup">Close</button>
+                </div>
+            </div>
+            <div id="customInstructionsPopup" class="popup">
+                <div class="popup-content">
+                    <label for="exampleRequest">Example Request:</label>
+                    <textarea id="exampleRequest"></textarea>
+                    <label for="exampleResponse">Example Response:</label>
+                    <textarea id="exampleResponse"></textarea>
+                    <button id="submitInstructions">Submit</button>
+                    <button id="closeCustomInstructions">Close</button>
+                </div>
+            </div>
+        </div>
+        <div id="rightPane">
+            <h2 id="modelDisplay">Active Model:</h2>
+            <div id="chatArea"></div>
+            <div id="inputArea">
+                <textarea id="userInput" placeholder="There's always a way, don't give up..."></textarea>
+                <button id="sendButton"><img src="/static/icons/send.png" alt="Send" style="width: 25px; height: 25px;"></button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

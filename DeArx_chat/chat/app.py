@@ -17,8 +17,7 @@ app.secret_key = base64.b64decode(os.getenv('OPENAI_API_KEY')).decode()
 
 @app.route('/')
 def index():
-    # Return a success message when the root is accessed
-    return jsonify({'messages': 'Server is running!'}), 200
+    return render_template('index.html')
 
 @app.route('/message', methods=['POST'])
 def message():
@@ -266,6 +265,28 @@ def export_tables_to_csv(db_path):
 
     
     conn.close()
+
+@app.route('/get_active_model', methods=['GET'])
+def get_active_model():
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT name FROM models WHERE is_active = ?', (True,))
+    active_model_result = cursor.fetchone()
+    conn.close()
+
+    if active_model_result is None:
+        # Set 'Test' as active model if no model is active
+        conn = sqlite3.connect('instance/chat.db')
+        cursor = conn.cursor()
+        cursor.execute('UPDATE models SET is_active = ? WHERE name = ?', (True, 'Test'))
+        conn.commit()
+        conn.close()
+
+        active_model_name = 'Test'
+    else:
+        active_model_name = active_model_result[0]
+
+    return jsonify({'name': active_model_name})
 
 @app.cli.command()
 def setup():
