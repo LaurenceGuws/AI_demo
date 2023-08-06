@@ -46,7 +46,7 @@ def message():
         conversation = {'name': conversation[1], 'messages': formatted_messages}
     else:
         # If there is no active conversation, create a new one and write it to the database
-        conversation = {'name': message_content, 'messages': []}
+        conversation = {'name': message_content[:10], 'messages': []}
         cursor.execute('INSERT INTO conversation (name, is_active) VALUES (?, ?)', (message_content, True))
 
     # Commit changes and close the database connection

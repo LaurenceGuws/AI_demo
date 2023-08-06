@@ -45,8 +45,8 @@ body {
 
 #leftPane h2, #rightPane h2 {
     color: #919191;
-    padding: 10px;
-    font-size: 20px;
+    padding: 5px;
+    font-size: 10px;
 }
 
 #conversations button {
