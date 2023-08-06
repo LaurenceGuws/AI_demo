@@ -20,18 +20,18 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #1f1449;       /* color of the tracking area */
+    background: #454545;       /* color of the tracking area */
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #47a3ff; /* color of the scroll thumb */
+    background-color: #919191; /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #1f1449; /* creates padding around scroll thumb */
+    border: 3px solid #4b4b4b; /* creates padding around scroll thumb */
 }
 
 #leftPane {
     width: 20%;
-    background-color: #161439;;
+    background-color: #181818;;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -44,14 +44,14 @@ body {
 }
 
 #leftPane h2, #rightPane h2 {
-    color: #47a3ff;
+    color: #919191;
     padding: 10px;
     font-size: 20px;
 }
 
 #conversations button {
-    background-color: #161439;
-    color: #47a3ff;
+    background-color: #333333;
+    color: #919191;
     padding: 10px;
     margin-bottom: 10px;
     margin-right: 20px;
@@ -59,19 +59,20 @@ body {
     position: relative;
     border-width: 7px;
     border-style: solid;
-    border-color:#161439;
+    border-color:#333333;
     font-size: 10px;
 }
 
 #conversations button:hover {
-    background-color: #47a3ff;
-    color: #161439;
+    background-color: #919191;
+    border-color:#919191;
+    color: #181818;
     cursor: pointer;
 }
 
 #optionsArea {
     padding: 10px;
-    background-color: #161439;;
+    background-color: #181818;;
     display: flex;
     justify-content: center;
 }
@@ -79,9 +80,9 @@ body {
 #optionsButton {
     width: 98%;
     height: 100%;
-    background-color: #161439;;
-    border: 2px solid #47a3ff;
-    color: #47a3ff;
+    background-color: #333333;;
+    border: 2px solid #919191;
+    color: #919191;
     cursor: pointer;
     font-size: 14px;
     border-radius: 10px;
@@ -100,10 +101,10 @@ body {
 }
 
 .popup-content {
-    background-color: #1f1449;
+    background-color: #484848;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #47a3ff;
+    border: 1px solid #919191;
     width: 15%;
     display: flex;
     flex-direction: column;
@@ -115,22 +116,22 @@ body {
     width: 100%;
     margin-bottom: 10px;
     resize: none;
-    background-color: #8fc7ff;
+    background-color: #bcbcbc;
     color: #000000;
     font-size: 14px;
     border-radius: 10px;
 }
 
 #customInstructionsPopup .popup-content label {
-    color: #8fc7ff;
+    color: #bcbcbc;
 }
 
 .popup-content button {
     width: 100%;
     padding: 10px 20px;
-    background-color: #161439;
-    border: 2px solid #47a3ff;
-    color: #47a3ff;
+    background-color: #181818;
+    border: 2px solid #919191;
+    color: #919191;
     cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -141,9 +142,9 @@ body {
 #closePopup {
     width: 100%;
     padding: 10px 20px;
-    background-color: #161439;
-    border: 2px solid #47a3ff;
-    color: #47a3ff;
+    background-color: #181818;
+    border: 2px solid #919191;
+    color: #919191;
     cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -152,21 +153,23 @@ body {
 
 #rightPane {
     width: 80%;
-    background-color: #161439;
+    background-color: #181818;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-left: 2px solid #47a3ff;
+    border-left: 2px solid #919191;
 }
 
 #chatArea {
     overflow-y: auto;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .message-bubble-user {
-    background-color: #1564b2;
-    color: #19166b;
+    background-color: #555555;
+    color: #282828;
     padding: 10px;
     margin-bottom: 10px;
     margin-left: 20px;
@@ -174,12 +177,12 @@ body {
     position: relative;
     border-width: 7px;
     border-style: solid;
-    border-color:#1564b2;
+    border-color:#555555;
 }
 
 .message-bubble-assistant {
-    background-color: #47a3ff;
-    color: #19166b;
+    background-color: #919191;
+    color: #282828;
     padding: 10px;
     margin-bottom: 10px;
     margin-right: 20px;
@@ -187,14 +190,15 @@ body {
     position: relative;
     border-width: 7px;
     border-style: solid;
-    border-color:#47a3ff;
+    border-color:#919191;
 }
+
 
 #inputArea {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    background-color: #161439;
+    background-color: #181818;
     color: #000000;
     align-items: center;
 }
@@ -202,7 +206,7 @@ body {
 #userInput {
     width: 88%;
     resize: none;
-    background-color: #8fc7ff;
+    background-color: #bcbcbc;
     color: #000000;
     font-size: 14px;
     border-radius: 10px;
@@ -216,9 +220,9 @@ body {
 #sendButton {
     width: 10%;
     height: 100%;
-    background-color: #161439;;
-    border: 2px solid #47a3ff;
-    color: #47a3ff;
+    background-color: #333333;;
+    border: 2px solid #919191;
+    color: #919191;
     cursor: pointer;
     font-size: 14px;
     border-radius: 10px;

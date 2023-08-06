@@ -25,3 +25,8 @@ spec:
             secretKeyRef:
               name: openai-secret
               key: OPENAI_API_KEY
+        - name: GOOGLE_SERVICE_ACCOUNT_JSON_BASE64
+          valueFrom:
+            secretKeyRef:
+              name: openai-secret
+              key: GOOGLE.json

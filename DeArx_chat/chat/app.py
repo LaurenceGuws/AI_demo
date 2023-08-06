@@ -13,11 +13,12 @@ import json
 
 app = Flask(__name__)
 CORS(app)
-app.secret_key = base64.b64decode(os.getenv('OPENAI_API_KEY')).decode()
+app.secret_key = 'Dev'
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/message', methods=['POST'])
 def message():

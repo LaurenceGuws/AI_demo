@@ -4,7 +4,7 @@ import base64
 
 
 def interact(messages):
-    return None
+    # return None
     openai_key = base64.b64decode(os.getenv('OPENAI_API_KEY')).decode()
     # openai_key = base64.b64decode("c2stTnRWMDRnbWpkcE8wVW9LZGJSYlpUM0JsYmtGSkdyTWVQOVpsU3FtSVdDRkFhajVx").decode()
     openai.api_key = openai_key

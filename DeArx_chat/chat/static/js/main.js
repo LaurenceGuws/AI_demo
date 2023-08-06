@@ -53,7 +53,15 @@ function sendMessage() {
                 messageElement.textContent = message.content;
                 chatArea.appendChild(messageElement);
             });
+
+            scrollToBottom();  // Ensure the latest messages are in view
         });
+}
+
+
+function scrollToBottom() {
+    var chatArea = document.getElementById("chatArea");
+    chatArea.scrollTop = chatArea.scrollHeight;
 }
 
 document.getElementById('sendButton').addEventListener('click', sendMessage);
