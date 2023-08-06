@@ -177,7 +177,8 @@ body {
     position: relative;
     border-width: 7px;
     border-style: solid;
-    border-color:#555555;
+    border-color: #555555;
+    white-space: pre-wrap; /* Added this line */
 }
 
 .message-bubble-assistant {
@@ -190,8 +191,10 @@ body {
     position: relative;
     border-width: 7px;
     border-style: solid;
-    border-color:#919191;
+    border-color: #919191;
+    white-space: pre-wrap; /* Added this line */
 }
+
 
 
 #inputArea {
