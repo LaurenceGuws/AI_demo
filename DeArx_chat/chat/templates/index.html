@@ -18,10 +18,11 @@
             <div id="optionsPopup" class="popup">
                 <div class="popup-content">
                     <img src="/static/icons/company-logo.png" alt="Company Logo" style="width: 112.5px; height: 37.5px;">
-                    <button id="customInstructionsButton">Custom Instructions</button>
                     <button id="changeModelButton">Change Model</button>
-                    <button id="restartServer">Restart Server</button>
+                    <button id="customInstructionsButton">Custom Instructions</button>
+                    <button id="startNewConversation">Start new conversation</button>
                     <button id="downloadDB">Download DB</button>
+                    <button id="restartServer">Restart Server</button>
                     <button id="closePopup">Close</button>
                 </div>
             </div>
@@ -41,6 +42,13 @@
                     <button id="closeCustomInstructions">Close</button>
                 </div>
             </div>
+            <div id="conversationOptionsPopup" class="popup">
+                <div class="popup-content">
+                    <button id="changeConversation">Change to this conversation</button>
+                    <button id="deleteConversation">Delete this conversation</button>
+                    <button id="closeConversationOptionsPopup">Close popup</button>
+                </div>
+            </div>            
         </div>
         <div id="rightPane">
             <h2 id="modelDisplay">Active Model:</h2>

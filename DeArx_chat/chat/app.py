@@ -19,6 +19,18 @@ app.secret_key = 'Dev'
 def index():
     return render_template('index.html')
 
+@app.route('/new_conversation')
+def new_conversation():
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+    
+    # Set all conversations' is_active field to false
+    cursor.execute('UPDATE conversation SET is_active = FALSE')
+    conn.commit()
+    conn.close()
+
+    return jsonify({'message': 'New conversation started'}), 200
+
 
 @app.route('/message', methods=['POST'])
 def message():
@@ -117,7 +129,25 @@ def get_conversation(name):
     # Connect to the database and fetch the messages of the specified conversation
     conn = sqlite3.connect('instance/chat.db')
     cursor = conn.cursor()
+        # Set all conversations' is_active field to false
+    cursor.execute('UPDATE conversation SET is_active = FALSE')
+    # Set the conversation with the given name to is_active=true
+    cursor.execute('UPDATE conversation SET is_active = TRUE WHERE name = ?', (name,))
+    conn.commit()
     cursor.execute('SELECT content FROM messages JOIN conversation ON messages.conversation_id = conversation.id WHERE conversation.name = ?', (name,))
+    conversation_messages = [{'role': 'user' if i % 2 == 0 else 'assistant', 'content': row[0]} for i, row in enumerate(cursor.fetchall())]
+    conn.close()
+
+    # Return the messages of the specified conversation
+    return jsonify({'conversation_messages': conversation_messages}), 200
+
+@app.route('/active_conversation', methods=['GET'])
+def active_conversation():
+    # Connect to the database and fetch the messages of the specified conversation
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT content FROM messages JOIN conversation ON messages.conversation_id = conversation.id WHERE conversation.is_active = TRUE')
     conversation_messages = [{'role': 'user' if i % 2 == 0 else 'assistant', 'content': row[0]} for i, row in enumerate(cursor.fetchall())]
     conn.close()
 
@@ -229,7 +259,6 @@ def restart_server():
     # Return a success message
     return jsonify({'message': 'Server restarted successfully'}), 200
 
-
 @app.route('/downloadDB')
 def download_db():
     # Define the path to the SQLite file
@@ -289,6 +318,37 @@ def get_active_model():
         active_model_name = active_model_result[0]
 
     return jsonify({'name': active_model_name})
+
+@app.route('/delete_conversation/<name>', methods=['DELETE'])
+def delete_conversation(name):
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+
+    try:
+        # Get the conversation_id for the given name
+        cursor.execute('SELECT id FROM conversation WHERE name = ?', (name,))
+        conv_id = cursor.fetchone()
+
+        if not conv_id:
+            conn.close()
+            return jsonify({'message': 'Conversation not found'}), 404
+
+        # Delete messages associated with the conversation
+        cursor.execute('DELETE FROM messages WHERE conversation_id = ?', (conv_id[0],))
+
+        # Delete the conversation itself
+        cursor.execute('DELETE FROM conversation WHERE id = ?', (conv_id[0],))
+
+        # Commit the changes
+        conn.commit()
+        conn.close()
+
+        return jsonify({'message': 'Conversation and associated messages deleted successfully'}), 200
+
+    except sqlite3.Error as e:
+        conn.close()
+        return jsonify({'message': 'Error while deleting the conversation: ' + str(e)}), 500
+
 
 @app.cli.command()
 def setup():
