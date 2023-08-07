@@ -1,22 +1,200 @@
 {
 	"info": {
-		"_postman_id": "394e02c3-dab1-4640-8ed3-d2fd8cd2819e",
-		"name": "Fask_DeArx_chat",
+		"_postman_id": "17ca48a9-be58-48f6-8e6d-d7d7cf7bb4a1",
+		"name": "Chat API",
+		"description": "A collection of endpoints for a chat system",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20963231"
 	},
 	"item": [
 		{
+			"name": "GETS",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Conversations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30000/conversations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								"conversations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Conversation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30000/new_conversation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								"new_conversation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Conversation by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30000/conversations/Hi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								"conversations",
+								"Hi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Conversation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30000/active_conversation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								"active_conversation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Models",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30000/get_models",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								"get_models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restart Server",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30000/restartServer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								"restartServer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download DB",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30000/downloadDB",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								"downloadDB"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Model",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:30000/get_active_model",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								"get_active_model"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "POST",
 			"item": [
 				{
-					"name": "send a message",
+					"name": "Send Message",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"message\": {\r\n        \"content\": \"hi\"\r\n    }\r\n}\r\n",
+							"raw": "{\"message\": {\"content\": \"Hi\"}}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,32 +216,13 @@
 					"response": []
 				},
 				{
-					"name": "upload a file",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/upload",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"upload"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "change the active model",
+					"name": "Change Model",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"model_name\": \"test\"\r\n}\r\n",
+							"raw": "{\"model_name\": \"test\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,13 +244,13 @@
 					"response": []
 				},
 				{
-					"name": "save custom instructions",
+					"name": "Custom Instructions",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"example_request\": \"Your example request here\",\r\n    \"example_response\": \"Your example response here\"\r\n}",
+							"raw": "{\"example_request\": \"Request\", \"example_response\": \"Response\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -111,122 +270,62 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Upload File",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "<path_to_file>",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"type": "file",
+									"src": "/C:/Repos/AI_demo/planning/Postman_collection/Fask_DeArx_chat.postman_collection.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:30000/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "30000",
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "GET",
+			"name": "DELETE",
 			"item": [
 				{
-					"name": "get all the conversation names",
+					"name": "Delete Conversation",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:30000/conversations",
+							"raw": "http://localhost:30000/delete_conversation/Hi",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "30000",
 							"path": [
-								"conversations"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "check if the server is running",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get messages of a conversation",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/conversations/hi",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"conversations",
-								"hi"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all the model names",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/get_models",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"get_models"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "restart the server",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/restartServer",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"restartServer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "download the database ZIP file",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/downloadDB",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"downloadDB"
+								"delete_conversation",
+								"Hi"
 							]
 						}
 					},

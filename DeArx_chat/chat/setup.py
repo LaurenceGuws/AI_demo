@@ -58,22 +58,23 @@ def build_db(db_file):
         VALUES (?, FALSE)
         """, (model_name,))
 
+    conn.commit()
+
+
      # Insert dummy data
-    for i in range(1, 21):  # 5 conversations
-        conversation_name = f"dummy_conversation_{i}"
-        cursor.execute("""
-        INSERT INTO conversation (name, is_active)
-        VALUES (?, FALSE)
-        """, (conversation_name,))
-        conversation_id = cursor.lastrowid
-        for j in range(20):  # 10 messages for each conversation
-            user_id = j % 2  # Alternating user_id
-            content = f"dummy_message_{j+1}_from_user_{user_id}"
-            cursor.execute("""
-            INSERT INTO messages (conversation_id, user_id, content)
-            VALUES (?, ?, ?)
-            """, (conversation_id, user_id, content))
+    # for i in range(1, 21):  # 5 conversations
+    #     conversation_name = f"dummy_conversation_{i}"
+    #     cursor.execute("""
+    #     INSERT INTO conversation (name, is_active)
+    #     VALUES (?, FALSE)
+    #     """, (conversation_name,))
+    #     conversation_id = cursor.lastrowid
+    #     for j in range(20):  # 10 messages for each conversation
+    #         user_id = j % 2  # Alternating user_id
+    #         content = f"dummy_message_{j+1}_from_user_{user_id}"
+    #         cursor.execute("""
+    #         INSERT INTO messages (conversation_id, user_id, content)
+    #         VALUES (?, ?, ?)
+    #         """, (conversation_id, user_id, content))
 
-    conn.commit()
-
-    conn.commit()
+    # conn.commit()

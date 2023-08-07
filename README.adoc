@@ -1,17 +1,17 @@
-= AI Chatbot for Next-Gen Presentations 🤖✨
+= DeArx AI Chatbot for experimentation 🤖✨
 
-Welcome to the future of AI-driven presentations! Our chatbot leverages cutting-edge machine learning techniques to offer real-time responses and create an interactive experience for your audience. Perfect for tech talks, workshops, webinars, and more.
+image::DeArx_chat\chat\static\icons\company-logo.png[Chatbot Demo Image]
 
-image::path/to/chatbot-demo-image.png[Chatbot Demo Image]
-
-NOTE: Replace the above path with the actual path of your chatbot demo image.
+Welcome to the future! This application aims to give us the oppertunity to explore LLM API's and open sourced models as a team!
+Implementing an additional API into the app will be as simple as writing a class and adding it to the models folder (more details below). Were as hosting
+a local model will still be added.''
 
 == Features 🚀
 
-* *Real-time Responses:* Engage your audience with instant replies.
-* *AI-Powered:* Built on state-of-the-art AI frameworks.
-* *Scalable:* Ready for Kubernetes deployments.
-* *Dockerized:* Containerized application for consistent environments.
+* *Swap between configured models*
+* *Swap between past conversations*
+* *Add a model in a few simple steps*
+* *Download your local db as csv files and more!*
 
 == Getting Started 🛠
 
@@ -21,13 +21,48 @@ NOTE: Replace the above path with the actual path of your chatbot demo image.
 * Kubernetes cluster set up (local or cloud).
 * Basic knowledge of Kubernetes.
 
+
 === Building the Docker Image
 
-Instructions placeholder - Detailed steps on building the Docker image will go here.
+.First, navigate to the chat directory:
+[source,bash]
+----
+cd .\DeArx_chat\chat
+----
+
+.Now, build the Docker image:
+[source,bash]
+----
+docker build -t chat_py .
+----
 
 === Deploying with Kubernetes
 
-Instructions placeholder - Detailed steps on applying the Kubernetes files will go here.
+.Navigate to the Kubernetes directory:
+[source,bash]
+----
+cd .\DeArx_chat\chat\k8s
+----
+
+.Apply the Kubernetes configurations:
+[source,bash]
+----
+kubectl apply -f .
+----
+
+=== API Authentication
+
+The necessary credentials will be:
+
+* Added to `secret.yaml` as a base64 encoded string.
+* Added to `deployment.yaml` under the `env:` tag.
+
+.You can reference the credentials in Python as follows:
+[source,python]
+----
+api_key = base64.b64decode(os.getenv('env_var_name_in_deployment_file')).decode()
+----
+
 
 == Contributing 🌐
 
