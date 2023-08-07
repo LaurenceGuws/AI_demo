@@ -1,0 +1,7 @@
+beginning prompt: -> gpt_4 + web scraping plugin
+I need to make a presentation for my software development team.
+The theme is LLM's, how we can use it to improve our work capabilities.
+I will be referring to Large language models when I use the term AI.
+I need you to help me make this presentation intriging, and educational. 
+I want to make a demo app using the AI tools I use in my every day work, and illustrate
+the do's and don'ts when it comes to using AI to develop software.

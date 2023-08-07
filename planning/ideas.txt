@@ -1,0 +1,5 @@
+1. build a edge collection containing tools the team can use.
+2. make a repo with a POC, using small commits to illustrate the building process when using AI.
+3. make a script that removes sensitive info from a prompt.
+4. make a stunning but simple powerpoint presentation to guide the demo.
+5. practice the presentation with OBS

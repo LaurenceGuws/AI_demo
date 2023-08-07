@@ -46,8 +46,8 @@ def message():
         conversation = {'name': conversation[1], 'messages': formatted_messages}
     else:
         # If there is no active conversation, create a new one and write it to the database
-        conversation = {'name': message_content[:10], 'messages': []}
-        cursor.execute('INSERT INTO conversation (name, is_active) VALUES (?, ?)', (message_content, True))
+        conversation = {'name': message_content[:20], 'messages': []}
+        cursor.execute('INSERT INTO conversation (name, is_active) VALUES (?, ?)', (message_content[:20], True))
 
     # Commit changes and close the database connection
     conn.commit()
@@ -58,6 +58,7 @@ def message():
 
     # Format the messages for use with the LLM
     messages_for_llm = [{'role': m['role'], 'content': m['content']} for m in conversation['messages']]
+
 
     # Fetch the active model from the database
     conn = sqlite3.connect('instance/chat.db')
