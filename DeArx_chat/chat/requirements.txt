@@ -25,3 +25,4 @@ urllib3==2.0.4
 Werkzeug==2.3.6
 yarl==1.9.2
 flask-cors
+google.generativeai

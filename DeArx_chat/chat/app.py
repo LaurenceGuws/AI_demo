@@ -1,4 +1,3 @@
-import base64
 import importlib
 import zipfile
 import pandas as pd
@@ -9,7 +8,6 @@ from werkzeug.utils import secure_filename
 import os
 import sqlite3
 from setup import build_db
-import json
 
 app = Flask(__name__)
 CORS(app)
@@ -30,7 +28,6 @@ def new_conversation():
     conn.close()
 
     return jsonify({'message': 'New conversation started'}), 200
-
 
 @app.route('/message', methods=['POST'])
 def message():
@@ -112,6 +109,53 @@ def message():
     # Return the updated conversation
     return jsonify({'messages': conversation['messages']}), 200
 
+@app.route('/message', methods=['PUT', 'DELETE'])
+def message_operations():
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+
+    # Fetch the active conversation
+    cursor.execute('SELECT * FROM conversation WHERE is_active = ?', (True,))
+    conversation = cursor.fetchone()
+
+    if not conversation:
+        conn.close()
+        return jsonify({'message': 'No active conversation found'}), 404
+
+    conversation_id = conversation[0]  # Assuming 'id' is the first column
+
+    if request.method == 'PUT':
+        # Update the message content based on old content and active conversation
+        data = request.get_json()
+        old_content = data.get('old_content')
+        new_content = data.get('new_content')
+        try:
+            cursor.execute('UPDATE messages SET content = ? WHERE content = ? AND conversation_id = ?', (new_content, old_content, conversation_id))
+            if cursor.rowcount == 0:
+                conn.close()
+                return jsonify({'message': 'No matching message found'}), 404
+            conn.commit()
+            conn.close()
+            return jsonify({'message': 'Message updated successfully'}), 200
+        except sqlite3.Error as e:
+            conn.close()
+            return jsonify({'message': 'Error while updating the message: ' + str(e)}), 500
+    elif request.method == 'DELETE':
+        # Delete the message based on content and active conversation
+        data = request.get_json()
+        content_to_delete = data.get('content')
+        try:
+            cursor.execute('DELETE FROM messages WHERE content = ? AND conversation_id = ?', (content_to_delete, conversation_id))
+            if cursor.rowcount == 0:
+                conn.close()
+                return jsonify({'message': 'No matching message found'}), 404
+            conn.commit()
+            conn.close()
+            return jsonify({'message': 'Message deleted successfully'}), 200
+        except sqlite3.Error as e:
+            conn.close()
+            return jsonify({'message': 'Error while deleting the message: ' + str(e)}), 500
+
 @app.route('/conversations', methods=['GET'])
 def get_conversations():
     # Connect to the database and fetch all conversation names
@@ -129,7 +173,7 @@ def get_conversation(name):
     # Connect to the database and fetch the messages of the specified conversation
     conn = sqlite3.connect('instance/chat.db')
     cursor = conn.cursor()
-        # Set all conversations' is_active field to false
+    # Set all conversations' is_active field to false
     cursor.execute('UPDATE conversation SET is_active = FALSE')
     # Set the conversation with the given name to is_active=true
     cursor.execute('UPDATE conversation SET is_active = TRUE WHERE name = ?', (name,))
@@ -140,6 +184,31 @@ def get_conversation(name):
 
     # Return the messages of the specified conversation
     return jsonify({'conversation_messages': conversation_messages}), 200
+
+@app.route('/conversation', methods=['PUT'])
+def conversation_operations():
+    # Fetch the old name and new name from the incoming JSON
+    data = request.get_json()
+    old_name = data.get('old_name')
+    new_name = data.get('new_name')
+
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+
+    try:
+        # Update the conversation name for the given old name
+        cursor.execute('UPDATE conversation SET name = ? WHERE name = ?', (new_name, old_name))
+        if cursor.rowcount == 0:
+            conn.close()
+            return jsonify({'message': 'No matching conversation found'}), 404
+        conn.commit()
+        conn.close()
+
+        return jsonify({'message': 'Conversation renamed successfully'}), 200
+
+    except sqlite3.Error as e:
+        conn.close()
+        return jsonify({'message': 'Error while renaming the conversation: ' + str(e)}), 500
 
 @app.route('/active_conversation', methods=['GET'])
 def active_conversation():
@@ -348,6 +417,32 @@ def delete_conversation(name):
     except sqlite3.Error as e:
         conn.close()
         return jsonify({'message': 'Error while deleting the conversation: ' + str(e)}), 500
+
+@app.route('/update_conversation_name', methods=['PUT'])
+def update_conversation_name():
+    # Fetch the old and new name from the incoming JSON
+    data = request.get_json()
+    old_name = data.get('old_name')
+    new_name = data.get('new_name')
+
+    # Connect to the SQLite database
+    conn = sqlite3.connect('instance/chat.db')
+    cursor = conn.cursor()
+
+    try:
+        # Update the conversation name for the given old name
+        cursor.execute('UPDATE conversation SET name = ? WHERE name = ?', (new_name, old_name))
+        if cursor.rowcount == 0:
+            conn.close()
+            return jsonify({'message': 'No matching conversation found'}), 404
+        conn.commit()
+        conn.close()
+
+        return jsonify({'message': 'Conversation renamed successfully'}), 200
+
+    except sqlite3.Error as e:
+        conn.close()
+        return jsonify({'message': 'Error while renaming the conversation: ' + str(e)}), 500
 
 
 @app.cli.command()

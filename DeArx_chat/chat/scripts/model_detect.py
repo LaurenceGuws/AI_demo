@@ -33,7 +33,7 @@ def test_models():
 
         # Attempt to call the required method with a test prompt
         try:
-            messages_for_gpt = [{'role': 'user', 'content': 'test prompt'}]
+            messages_for_gpt = [{'role': 'user', 'content': 'Hi!'}]
             response = module.interact(messages_for_gpt)  
             assert isinstance(response, str), "Response is not a string"
             print(f"Module '{filename}' passed the test.")

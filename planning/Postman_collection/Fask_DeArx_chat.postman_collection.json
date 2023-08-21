@@ -1,337 +1,181 @@
 {
 	"info": {
-		"_postman_id": "17ca48a9-be58-48f6-8e6d-d7d7cf7bb4a1",
-		"name": "Chat API",
-		"description": "A collection of endpoints for a chat system",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20963231"
+	  "_postman_id": "abc123",
+	  "name": "Chat App",
+	  "description": "Collection for testing the Chat App",
+	  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "GETS",
-			"item": [
-				{
-					"name": "Index",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Conversations",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/conversations",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"conversations"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Conversation",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/new_conversation",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"new_conversation"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Conversation by Name",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/conversations/Hi",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"conversations",
-								"Hi"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Active Conversation",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/active_conversation",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"active_conversation"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Models",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/get_models",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"get_models"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Restart Server",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/restartServer",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"restartServer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Download DB",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/downloadDB",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"downloadDB"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Active Model",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/get_active_model",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"get_active_model"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "POST",
-			"item": [
-				{
-					"name": "Send Message",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"message\": {\"content\": \"Hi\"}}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:30000/message",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"message"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Change Model",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"model_name\": \"test\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:30000/change_model",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"change_model"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Custom Instructions",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"example_request\": \"Request\", \"example_response\": \"Response\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:30000/custom_instructions",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"custom_instructions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Upload File",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": "<path_to_file>",
-									"disabled": true
-								},
-								{
-									"key": "",
-									"type": "file",
-									"src": "/C:/Repos/AI_demo/planning/Postman_collection/Fask_DeArx_chat.postman_collection.json"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:30000/upload",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"upload"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "DELETE",
-			"item": [
-				{
-					"name": "Delete Conversation",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:30000/delete_conversation/Hi",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "30000",
-							"path": [
-								"delete_conversation",
-								"Hi"
-							]
-						}
-					},
-					"response": []
-				}
-			]
+	  {
+		"name": "New Conversation",
+		"request": {
+		  "method": "GET",
+		  "url": "http://localhost:30000/new_conversation"
 		}
+	  },
+	  {
+		"name": "Post Message",
+		"request": {
+		  "method": "POST",
+		  "url": "http://localhost:30000/message",
+		  "headers": [
+			{
+			  "key": "Content-Type",
+			  "value": "application/json"
+			}
+		  ],
+		  "body": {
+			"mode": "raw",
+			"raw": "{\"message\": {\"content\": \"Hello!\"}}"
+		  }
+		}
+	  },
+	  {
+		"name": "Update Message",
+		"request": {
+		  "method": "PUT",
+		  "url": "http://localhost:30000/message",
+		  "headers": [
+			{
+			  "key": "Content-Type",
+			  "value": "application/json"
+			}
+		  ],
+		  "body": {
+			"mode": "raw",
+			"raw": "{\"old_content\": \"Hello!\", \"new_content\": \"Hi!\"}"
+		  }
+		}
+	  },
+	  {
+		"name": "Get Conversations",
+		"request": {
+		  "method": "GET",
+		  "url": "http://localhost:30000/conversations"
+		}
+	  },
+	  {
+		"name": "Get Conversation",
+		"request": {
+		  "method": "GET",
+		  "url": "http://localhost:30000/conversations/{name}"
+		}
+	  },
+	  {
+		"name": "Rename Conversation",
+		"request": {
+		  "method": "PUT",
+		  "url": "http://localhost:30000/conversation",
+		  "headers": [
+			{
+			  "key": "Content-Type",
+			  "value": "application/json"
+			}
+		  ],
+		  "body": {
+			"mode": "raw",
+			"raw": "{\"old_name\": \"Old Name\", \"new_name\": \"New Name\"}"
+		  }
+		}
+	  },
+	  {
+		"name": "Get Active Conversation",
+		"request": {
+		  "method": "GET",
+		  "url": "http://localhost:30000/active_conversation"
+		}
+	  },
+	  {
+		"name": "Upload File",
+		"request": {
+		  "method": "POST",
+		  "url": "http://localhost:30000/upload",
+		  "headers": [
+			{
+			  "key": "Content-Type",
+			  "value": "multipart/form-data"
+			}
+		  ],
+		  "body": {
+			"mode": "formdata",
+			"formdata": [
+			  {
+				"key": "file",
+				"type": "file"
+			  }
+			]
+		  }
+		}
+	  },
+	  {
+		"name": "Change Model",
+		"request": {
+		  "method": "POST",
+		  "url": "http://localhost:30000/change_model",
+		  "headers": [
+			{
+			  "key": "Content-Type",
+			  "value": "application/json"
+			}
+		  ],
+		  "body": {
+			"mode": "raw",
+			"raw": "{\"model_name\": \"New Model\"}"
+		  }
+		}
+	  },
+	  {
+		"name": "Get Models",
+		"request": {
+		  "method": "GET",
+		  "url": "http://localhost:30000/get_models"
+		}
+	  },
+	  {
+		"name": "Custom Instructions",
+		"request": {
+		  "method": "POST",
+		  "url": "http://localhost:30000/custom_instructions",
+		  "headers": [
+			{
+			  "key": "Content-Type",
+			  "value": "application/json"
+			}
+		  ],
+		  "body": {
+			"mode": "raw",
+			"raw": "{\"example_request\": \"Example Request\", \"example_response\": \"Example Response\"}"
+		  }
+		}
+	  },
+	  {
+		"name": "Restart Server",
+		"request": {
+		  "method": "GET",
+		  "url": "http://localhost:30000/restartServer"
+		}
+	  },
+	  {
+		"name": "Download DB",
+		"request": {
+		  "method": "GET",
+		  "url": "http://localhost:30000/downloadDB"
+		}
+	  },
+	  {
+		"name": "Get Active Model",
+		"request": {
+		  "method": "GET",
+		  "url": "http://localhost:30000/get_active_model"
+		}
+	  },
+	  {
+		"name": "Delete Conversation",
+		"request": {
+		  "method": "DELETE",
+		  "url": "http://localhost:30000/delete_conversation/{name}"
+		}
+	  }
 	]
-}
+  }
+  
