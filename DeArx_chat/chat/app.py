@@ -82,7 +82,7 @@ def message():
     else:
         # Handle the case where there is no active model
         # For example, you could set active_model to a default value
-        active_model = 'test'
+        active_model = 'gpt'
 
     # Import the model's module and use it to generate a response
     model_module = importlib.import_module(f'models.{active_model}')
@@ -378,7 +378,7 @@ def get_active_model():
         # Set 'Test' as active model if no model is active
         conn = sqlite3.connect('instance/chat.db')
         cursor = conn.cursor()
-        cursor.execute('UPDATE models SET is_active = ? WHERE name = ?', (True, 'Test'))
+        cursor.execute('UPDATE models SET is_active = ? WHERE name = ?', (True, 'gpt'))
         conn.commit()
         conn.close()
 

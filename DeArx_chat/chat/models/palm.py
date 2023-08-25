@@ -28,8 +28,6 @@ def interact(messages):
     )
     
     # Extracting the response of the AI to your most recent request and casting it to string
-    print('response = ')
-    print(response)
     response_content = str(response.last)
 
     # Formatting the response to match the existing method's output

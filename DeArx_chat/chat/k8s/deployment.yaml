@@ -16,7 +16,7 @@ spec:
       containers:
       - name: chat-app-container
         image: chat_py:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
         env:

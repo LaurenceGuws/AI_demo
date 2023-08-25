@@ -9,7 +9,7 @@ def load_module(module_path):
 
 def main():
     # Directory where the models are stored
-    models_dir = "DeArx_chat/chat/models"
+    models_dir = "models"
 
     # Store the list of modules and their corresponding callable functions
     module_functions = {}
